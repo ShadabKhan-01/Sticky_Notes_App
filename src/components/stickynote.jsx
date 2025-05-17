@@ -52,7 +52,7 @@ export default function StickyNote({
   return (
     <div
       className={`relative w-64 h-64 p-4 shadow-xl rounded-md rotate-[-2deg] 
-        ${styles.bg} ${styles.border} ${styles.text} border cursor-pointer`}
+        ${styles.bg} ${styles.border} ${styles.text} border cursor-pointer overflow-y-auto overflow-x-clip`}
       onClick={() => setIsEditing(true)}
     >
       {/* Tape */}
