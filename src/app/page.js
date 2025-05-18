@@ -2,6 +2,8 @@
 import StickyNote from "@/components/stickynote";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import toast, { Toaster } from 'react-hot-toast';
+import { Trash2 } from "lucide-react";
 
 export default function Home() {
 
@@ -29,6 +31,7 @@ export default function Home() {
   // setting data to local storage
   useEffect(() => {
     localStorage.setItem("stickyNotes", JSON.stringify(notes));
+    toast.success('Saved!')
   }, [notes])
 
 
@@ -62,15 +65,22 @@ export default function Home() {
         behavior: 'smooth' // optional: 'auto' or 'smooth'
       });
     }, 50);
+    toast.success('Added Successfully!')
   }
 
   // Delete a note
   const deleteNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
+    setTimeout(() => {
+      toast('Deleted!', {
+        icon: <Trash2 stroke="red" />,
+      });
+    }, 50);
   };
 
   return (
     <div>
+      <div><Toaster /></div>
       <ul className="w-[95vw] m-auto mt-10 flex justify-evenly gap-5 flex-wrap">
         {notes.map((object, index) =>
         (
@@ -93,7 +103,7 @@ export default function Home() {
       </div>
       <div className={`fixed flex items-center justify-evenly left-1/2 bottom-10 -translate-1/2 bg-gray-200 border w-3/4 sm:w-1/2 h-14 rounded-2xl transition-transform duration-300 ease-in-out ${!isVisible && 'translate-y-[100vh]'}`}>
         {Sticky.map((color, index) =>
-          (<div key={index} className={`h-8 w-8 ${color} cursor-pointer hover:scale-150 transition-all ease-in-out duration-100`} onClick={() => addNote(color)} />))}
+          (<div key={index} className={`h-8 w-8 ${color} cursor-pointer hover:scale-150 hover:-translate-y-3 transition-all ease-in-out duration-100`} onClick={() => addNote(color)} />))}
       </div>
     </div>
   );
