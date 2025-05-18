@@ -72,7 +72,7 @@ export default function StickyNote({
           e.stopPropagation();
           onDelete();
         }}
-        className="absolute top-2 right-2 text-red-600 hover:text-red-800"
+        className="absolute top-2 right-2 text-red-600 hover:text-red-800 cursor-pointer"
         aria-label="Delete note"
       >
         <Trash2 size={18}/>

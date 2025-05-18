@@ -31,7 +31,6 @@ export default function Home() {
   // setting data to local storage
   useEffect(() => {
     localStorage.setItem("stickyNotes", JSON.stringify(notes));
-    toast.success('Saved!')
   }, [notes])
 
 
@@ -87,11 +86,12 @@ export default function Home() {
           <li key={index} className="">
             <StickyNote color={object.color} title={object.title} content={object.content}
               onDelete={() => deleteNote(object.id)}
-              onUpdate={(updatedNote) =>
+              onUpdate={(updatedNote) =>{
                 setNotes(
                   notes.map((n) => (n.id === object.id ? { ...n, ...updatedNote } : n))
-                )
-              }
+                );
+                toast.success('Saved!');
+              }}
             />
           </li>
         )
