@@ -17,10 +17,10 @@ export default function Home() {
     "bg-purple-300"
   ])
 
-    // collection of Notes
+  // collection of Notes
   const [notes, setNotes] = useState([])
 
-// Getting data from local storage
+  // Getting data from local storage
   useEffect(() => {
     const storedNotes = JSON.parse(localStorage.getItem("stickyNotes")) || [];
     setNotes(storedNotes);
@@ -33,7 +33,7 @@ export default function Home() {
 
 
   // handling AddNotes Bar animation
-    useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -56,10 +56,12 @@ export default function Home() {
     const result = colorVal.slice(3, -4)
     const newNote = { id: uuidv4(), color: result, title: "Note", content: "Your content goes here..." }
     setNotes(prevNote => [...prevNote, newNote]);
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth' // optional: 'auto' or 'smooth'
-    });
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth' // optional: 'auto' or 'smooth'
+      });
+    }, 50);
   }
 
   // Delete a note
@@ -87,9 +89,9 @@ export default function Home() {
       </ul>
       <div className="fixed top-0 left-0 -z-10 h-screen w-screen flex justify-center items-center flex-col gap-3">
         <p className="text-3xl font-semibold text-center">Click on any note icon below to add a new note.</p>
-        <p className="text-2xl font-semibold">Double-tap any note to edit it.</p>
+        <p className="text-2xl font-semibold">Click on any note to edit it.</p>
       </div>
-      <div className={`fixed flex items-center justify-evenly left-1/2 bottom-10 -translate-1/2 bg-gray-200 border w-3/4 sm:w-1/2 h-14 rounded-2xl transition-transform duration-300 ease-in-out ${!isVisible&& 'translate-y-[100vh]'}`}>
+      <div className={`fixed flex items-center justify-evenly left-1/2 bottom-10 -translate-1/2 bg-gray-200 border w-3/4 sm:w-1/2 h-14 rounded-2xl transition-transform duration-300 ease-in-out ${!isVisible && 'translate-y-[100vh]'}`}>
         {Sticky.map((color, index) =>
           (<div key={index} className={`h-8 w-8 ${color} cursor-pointer hover:scale-150 transition-all ease-in-out duration-100`} onClick={() => addNote(color)} />))}
       </div>

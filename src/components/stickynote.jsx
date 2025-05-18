@@ -1,6 +1,13 @@
 "use client";
 import { useState } from "react";
 import { Trash2 } from "lucide-react"; // Optional: icon from lucide-react
+import { Handlee } from "next/font/google";
+
+const handlee = Handlee({
+  subsets:['latin'],
+  weight:'400',
+  display:'swap'
+})
 
 const colorMap = {
   green: {
@@ -52,7 +59,7 @@ export default function StickyNote({
   return (
     <div
       className={`relative w-64 h-64 p-4 shadow-xl rounded-md rotate-[-2deg] 
-        ${styles.bg} ${styles.border} ${styles.text} border cursor-pointer overflow-y-auto overflow-x-clip`}
+        ${styles.bg} ${styles.border} ${styles.text} border cursor-pointer overflow-y-auto overflow-x-clip custom-scrollbar`}
       onClick={() => setIsEditing(true)}
     >
       {/* Tape */}
@@ -83,16 +90,16 @@ export default function StickyNote({
           <textarea
             value={noteContent}
             onChange={(e) => setNoteContent(e.target.value)}
-            className="bg-transparent outline-none resize-none h-32"
+            className="bg-transparent outline-none resize-none h-32 custom-scrollbar"
           />
-          <button onClick={handleDone} className="mt-auto text-sm text-right underline">
+          <button onClick={handleDone} className="mt-auto text-sm text-right underline cursor-pointer">
             Done
           </button>
         </div>
       ) : (
         <>
           <h2 className="text-lg font-bold mb-2">{noteTitle}</h2>
-          <p>{noteContent}</p>
+          <p className={`font-[handlee] text-justify`}>{noteContent}</p>
         </>
       )}
     </div>
