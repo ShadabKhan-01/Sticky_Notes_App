@@ -99,7 +99,7 @@ export default function StickyNote({
       ) : (
         <>
           <h2 className="text-lg font-bold mb-2">{noteTitle}</h2>
-          <p className={`font-[handlee] text-justify`}>{noteContent}</p>
+          <p className={`${handlee.style.fontFamily} font-[handlee] text-justify`}>{noteContent}</p>
         </>
       )}
     </div>
